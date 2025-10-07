@@ -1,0 +1,52 @@
+{
+    "coldplay": [
+      "yellow",
+      "the_scientist",
+      "fix_you",
+      "clocks"
+    ],
+    "the_beatles": [
+      "let_it_be",
+      "hey_jude",
+      "come_together",
+      "yellow_submarine",
+      "help"
+    ],
+    "queen": [
+      "bohemian_rhapsody",
+      "dont_stop_me_now",
+      "we_will_rock_you",
+      "another_one_bites_the_dust"
+    ],
+    "pink_floyd": [
+      "wish_you_were_here",
+      "comfortably_numb",
+      "another_brick_in_the_wall",
+      "money",
+      "sorrow",
+      "breathe"
+    ],
+    "led_zeppelin": [
+      "stairway_to_heaven",
+      "kashmir",
+      "whole_lotta_love",
+      "all_of_my_love"
+    ],
+    "the_who": [
+      "baba_oriley",
+      "my_generation",
+      "wont_get_fooled_again"
+    ],
+    "mac_demarco": [
+      "salad_days",
+      "chamber_of_reflection",
+      "my_kind_of_woman",
+      "this_old_dog"
+    ],
+    "imagine_dragons": [
+      "radioactive",
+      "believer",
+      "demons"
+    ]
+  }
+  
