@@ -34,6 +34,7 @@ const AppContent = () => {
   }, [dispatch]);
   //[dispatch] -> executa o useEffect toda vez que dispatch mudar
 
+  //PrivateRoute -> componente para camada de proteção
   return (
     <>
       <Toaster />
@@ -41,7 +42,7 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
+        <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} /> 
         <Route path="/playlists" element={<PrivateRoute><Playlists /></PrivateRoute>} />
         <Route path="/playlists/:id" element={<PrivateRoute><PlaylistDetail /></PrivateRoute>} />
         <Route path="/music" element={<PrivateRoute><Music /></PrivateRoute>} />

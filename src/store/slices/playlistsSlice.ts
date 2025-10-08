@@ -53,6 +53,7 @@ const playlistsSlice = createSlice({
         id: crypto.randomUUID(),
         createdAt: new Date().toISOString(),
       };
+      
       state.playlists.push(newPlaylist);
       localStorage.setItem('playlists', JSON.stringify(state.playlists));
     },

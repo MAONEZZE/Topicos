@@ -43,8 +43,8 @@ const Login = () => {
     }
 
     // Static login (demo purposes)
-    const userId = crypto.randomUUID();
-    dispatch(login({ id: userId, email }));
+    const id = crypto.randomUUID();
+    dispatch(login({ id, email }));
     toast.success('Welcome to MusicHub!');
     navigate('/home');
   };

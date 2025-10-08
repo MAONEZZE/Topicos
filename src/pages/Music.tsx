@@ -33,11 +33,11 @@ const Music = () => {
   const [responseExampleSongs, setResponseExampleSongs] = useState<SongAndPupular[]>([]);
 
   useEffect(() => {
-    const loadPopularSongs = async () => {
+    const loadExamplesSongs = async () => {
       const songs = await getExamplesSongs();
       setResponseExampleSongs(songs);
     };
-    loadPopularSongs();
+    loadExamplesSongs();
   }, []);
 
   const handleSearch = async (e: React.FormEvent) => {

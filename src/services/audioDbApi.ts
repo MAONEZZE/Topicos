@@ -103,9 +103,9 @@ export const getExamplesSongs = async (): Promise<SongAndPupular[]> => {
   }
 };
 
-export const getPopularSongs = async (country): Promise<PopularMusicCountry[]> => {
+export const getPopularSongs = async (country_code): Promise<PopularMusicCountry[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/trending.php?country=${country}&type=itunes&format=singles`);
+    const response = await fetch(`${API_BASE_URL}/trending.php?country=${country_code}&type=itunes&format=singles`);
     const data = await response.json();
 
     if (!data.trending) {
@@ -113,8 +113,7 @@ export const getPopularSongs = async (country): Promise<PopularMusicCountry[]> =
       return [];
     }
 
-    const dataFormat = data.trending.map(tranformPopularSong);
-    return dataFormat
+    return data.trending.map(tranformPopularSong);
   } 
   catch (error) {
     console.error("erro nas musicas populares");
