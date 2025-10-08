@@ -13,7 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { getExamplesSongs, searchTrack } from '@/services/audioDbApi';
+import { getExamplesSongs, searchArtist, searchTrack } from '@/services/audioDbApi';
 import { setSearchResults, setLoading, clearSearchResults } from '@/store/slices/musicSlice';
 import { addSongToPlaylist, SongAndPupular } from '@/store/slices/playlistsSlice';
 import { RootState } from '@/store/store';
@@ -48,7 +48,7 @@ const Music = () => {
     }
 
     dispatch(setLoading(true));
-    const results = await searchTrack(searchQuery);
+    const results = await searchArtist(searchQuery);
     
     dispatch(setSearchResults(results));
     
@@ -96,11 +96,11 @@ const Music = () => {
         <div className="max-w-3xl mx-auto mb-12">
           <form onSubmit={handleSearch} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="search">Search for a good music!</Label>
+              <Label htmlFor="search">Search for a band</Label>
               <div className="flex gap-2">
                 <Input
                   id="search"
-                  placeholder={'Search by track name...'}
+                  placeholder={'Search by band name...'}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="flex-1"

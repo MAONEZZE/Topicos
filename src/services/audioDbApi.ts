@@ -3,15 +3,6 @@ import Artist from './musicas.json'
 
 const API_BASE_URL = 'https://www.theaudiodb.com/api/v1/json/123';
 
-interface AudioDbTrack {
-  idTrack: string;
-  strTrack: string;
-  strArtist: string;
-  strGenre: string;
-  intYearReleased: string;
-  strTrackThumb?: string;
-}
-
 export interface PopularMusicCountryTrack {
   idArtist: string;
   idAlbum: string;
@@ -22,16 +13,6 @@ export interface PopularMusicCountryTrack {
   strTrackThumb: string;
   strType: string;
 }
-
-
-const transformTrackToSong = (track: AudioDbTrack): Song => ({
-  id: track.idTrack,
-  name: track.strTrack,
-  artist: track.strArtist,
-  genre: track.strGenre || 'Unknown',
-  year: track.intYearReleased || 'Unknown',
-  thumbnail: track.strTrackThumb
-});
 
 const tranformPopularSong = (track: PopularMusicCountryTrack): SongAndPupular => ({
   idArtist: track.idArtist,
@@ -46,6 +27,37 @@ const tranformPopularSong = (track: PopularMusicCountryTrack): SongAndPupular =>
   year: ''
 });
 
+export const searchArtist = async (bandName: string): Promise<SongAndPupular[]> => {
+  try {
+    const responseAlbum = await fetch(`${API_BASE_URL}/searchalbum.php?s=${encodeURIComponent(bandName)}`);
+    const dataAlbum = await responseAlbum.json();
+
+    const idAlbuns = dataAlbum.album.map((album: any) => album.idAlbum)
+
+    const fetchPromises: Promise<any>[] = [];
+
+    for (const album_id of idAlbuns) {
+      const url = `${API_BASE_URL}/track.php?m=${album_id}`;
+      fetchPromises.push(fetch(url).then(res => res.json()));
+    }
+
+    const results = await Promise.all(fetchPromises);
+
+    const songs: any[] = [];
+
+    for (const json of results) {
+      if (json.track) {
+        songs.push(...json.track);
+      }
+    }
+    
+    return songs.map(tranformPopularSong);
+  } 
+  catch (error) {
+    
+  }
+}
+
 export const searchTrack = async (trackName: string): Promise<SongAndPupular[]> => {
   try {
     const response = await fetch(`${API_BASE_URL}/mostloved.php?format=${encodeURIComponent(trackName)}`);
@@ -55,7 +67,7 @@ export const searchTrack = async (trackName: string): Promise<SongAndPupular[]> 
       return [];
     }
 
-    return data.track.slice(0, 10).map(transformTrackToSong);
+    return data.track.slice(0, 10).map(tranformPopularSong);
   } catch (error) {
     console.error('Error searching track:', error);
     return [];

@@ -33,7 +33,7 @@ const SongCard = ({ song, onAddToPlaylist, showAddButton = true }: SongCardProps
             <p className="text-sm text-muted-foreground truncate">{song.artist}</p>
             <div className="flex gap-2 mt-1">
               <span className="text-xs px-2 py-1 rounded-full bg-secondary text-secondary-foreground">
-                {song.genre? song.genre : song.album}
+                {song.album}
               </span>
             </div>
           </div>
